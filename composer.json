@@ -1,0 +1,29 @@
+{
+    "name": "nbj/config",
+    "description": "Config reader library",
+    "keywords": ["config", "reader"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nikolaj Boel Jensen",
+            "email": "nbj@cego.dk"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "friendsofphp/php-cs-fixer": "*",
+        "mikey179/vfsStream": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nbj\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}

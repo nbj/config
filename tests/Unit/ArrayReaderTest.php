@@ -64,6 +64,14 @@ class ArrayReaderTest extends TestCase
     }
 
     /** @test */
+    public function it_returns_the_default_value_if_key_cannot_be_resolved()
+    {
+        $reader = new ArrayReader(vfsStream::url('configPath'));
+
+        $this->assertEquals('defaultValue', $reader->get('this.key.does.not.exist', 'defaultValue'));
+    }
+
+    /** @test */
     public function it_returns_null_if_config_key_is_an_empty_string()
     {
         $reader = new ArrayReader(vfsStream::url('configPath'));

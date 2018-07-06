@@ -100,4 +100,55 @@ class ArrayReaderTest extends TestCase
 
         $this->assertNull($value);
     }
+
+    /** @test */
+    public function it_takes_exception_to_setting_a_value_is_key_is_an_empty_string()
+    {
+        $reader = new ArrayReader(vfsStream::url('configPath'));
+
+        $safetyCheck = true;
+
+        try {
+            $reader->set('', 'new-value');
+
+            $safetyCheck = false;
+        } catch (Exception $exception) {
+            $this->assertInstanceOf(InvalidArgumentException::class, $exception);
+            $this->assertEquals('The given key is invalid. It must be a non-empty string', $exception->getMessage());
+        }
+
+        $this->assertTrue($safetyCheck);
+    }
+
+    /** @test */
+    public function it_takes_exception_to_setting_a_value_is_key_is_not_a_string()
+    {
+        $reader = new ArrayReader(vfsStream::url('configPath'));
+
+        $safetyCheck = true;
+
+        try {
+            $reader->set(10, 'new-value');
+
+            $safetyCheck = false;
+        } catch (Exception $exception) {
+            $this->assertInstanceOf(InvalidArgumentException::class, $exception);
+            $this->assertEquals('The given key is invalid. It must be a non-empty string', $exception->getMessage());
+        }
+
+        $this->assertTrue($safetyCheck);
+    }
+
+    /** @test */
+    public function it_can_have_new_values_set_to_it()
+    {
+        $reader = new ArrayReader(vfsStream::url('configPath'));
+        $this->assertNull($reader->get('this.key.is.new'));
+
+        $reader->set('this.key.is.new', 'new-value');
+        $this->assertEquals('new-value', $reader->get('this.key.is.new'));
+
+        $reader->set('key', 'value');
+        $this->assertEquals('value', $reader->get('key'));
+    }
 }

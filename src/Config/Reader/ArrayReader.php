@@ -68,6 +68,47 @@ class ArrayReader implements ConfigReader
     }
 
     /**
+     * Sets a value in the loaded configuration
+     *
+     * @param string $key
+     * @param mixed $value
+     * @param string $delimiter
+     *
+     * @return $this
+     */
+    public function set($key, $value, $delimiter = '.')
+    {
+        // Checks that $key is a non-empty string
+        // Otherwise throw an exception
+        if (!is_string($key) || empty($key)) {
+            throw new InvalidArgumentException('The given key is invalid. It must be a non-empty string');
+        }
+
+        // If the key does not contain the delimiter
+        // Simply write the value to the key
+        if (strpos($key, $delimiter) === false) {
+            $this->configs[$key] = $value;
+
+            return $this;
+        }
+
+        // Split the key string into separate keys based
+        // on the delimiter. Makes sure to always keep
+        // a reference to the correct position in
+        // the configuration array structure
+        $keys = explode($delimiter, $key);
+        $currentArrayStructure = &$this->configs;
+
+        foreach ($keys as $key) {
+            $currentArrayStructure = &$currentArrayStructure[$key];
+        }
+
+        $currentArrayStructure = $value;
+
+        return $this;
+    }
+
+    /**
      * Loads all configuration files. Defaults to .php files in the configuration path given
      *
      * @param string $pathToConfigFiles
@@ -82,7 +123,7 @@ class ArrayReader implements ConfigReader
 
         // Filter files down to only php files
         $files = array_filter($files, function ($file) use ($fileExtension) {
-            return strpos($file, $fileExtension);
+            return strpos($file, $fileExtension) !== false;
         });
 
         // Resolve each configuration file into the configs array

@@ -52,4 +52,17 @@ class ConfigTest extends TestCase
 
         $this->assertEquals('some-config-value', Config::read('some-config-key'));
     }
+
+    /** @test */
+    public function it_can_write_config_values_statically()
+    {
+        $reader = $this->createMock(ConfigReader::class);
+        $reader->method('set')->willReturn($reader);
+        $reader->method('get')->willReturn('written-config-value');
+
+        Config::init($reader);
+        Config::write('written-config-key', 'written-config-value');
+
+        $this->assertEquals('written-config-value', Config::read('written-config-key'));
+    }
 }

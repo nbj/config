@@ -147,6 +147,10 @@ class JsonReaderTest extends TestCase
 
         $reader->set('this.key.is.new', 'new-value');
         $this->assertEquals('new-value', $reader->get('this.key.is.new'));
+        $this->assertEquals(['key' => ['is' => ['new' => 'new-value']]], $reader->get('this'));
+
+        $reader->set('that', ['key' => ['is' => ['also' => ['new' => 'some-other-new-value']]]]);
+        $this->assertEquals('some-other-new-value', $reader->get('that.key.is.also.new'));
 
         $reader->set('key', 'value');
         $this->assertEquals('value', $reader->get('key'));

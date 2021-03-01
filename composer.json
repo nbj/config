@@ -14,7 +14,7 @@
     "require-dev": {
         "phpunit/phpunit": "*",
         "friendsofphp/php-cs-fixer": "*",
-        "mikey179/vfsStream": "*"
+        "mikey179/vfsstream": "*"
     },
     "autoload": {
         "psr-4": {

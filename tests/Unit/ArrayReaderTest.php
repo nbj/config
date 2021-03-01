@@ -13,7 +13,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
 
 class ArrayReaderTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         vfsStreamWrapper::register();
         vfsStreamWrapper::setRoot(new vfsStreamDirectory('configPath'));

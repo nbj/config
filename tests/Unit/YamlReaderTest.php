@@ -4,10 +4,9 @@ namespace Tests\Unit;
 
 use Exception;
 use InvalidArgumentException;
-use Nbj\Config\Reader\YamlReader;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
-use Nbj\Config\Reader\JsonReader;
+use Nbj\Config\Reader\YamlReader;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Nbj\Config\Contract\ConfigReader;
 use org\bovigo\vfs\vfsStreamDirectory;

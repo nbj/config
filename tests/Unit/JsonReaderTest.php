@@ -19,7 +19,7 @@ class JsonReaderTest extends TestCase
         vfsStreamWrapper::setRoot(new vfsStreamDirectory('configPath'));
 
         vfsStream::create([
-            'test.json' => '{"key":"value","another-key":{"nested-key":"nested-value"}}'
+            'test.json' => '{"key":"value","another-key":{"nested-key":"nested-value"}}',
         ]);
     }
 
@@ -58,8 +58,8 @@ class JsonReaderTest extends TestCase
         $this->assertEquals([
             'key'         => 'value',
             'another-key' => [
-                'nested-key' => 'nested-value'
-            ]
+                'nested-key' => 'nested-value',
+            ],
         ], $reader->get('test'));
     }
 

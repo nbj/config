@@ -10,7 +10,9 @@
             "email": "nbj@cego.dk"
         }
     ],
-    "require": {},
+    "require": {
+        "ext-json": "*"
+    },
     "require-dev": {
         "phpunit/phpunit": "*",
         "friendsofphp/php-cs-fixer": "*",

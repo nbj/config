@@ -61,7 +61,7 @@ class Config
      */
     protected static function guardAgainstConfigReaderNotBeingInitialized()
     {
-        if (!self::$configReader) {
+        if ( ! self::$configReader) {
             throw new RuntimeException('No ConfigReader has been initialized.');
         }
     }

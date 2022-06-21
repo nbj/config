@@ -37,7 +37,7 @@ class ArrayReader implements ConfigReader
     {
         // Checks that $keys is a non-empty string
         // Otherwise the $default value is returned
-        if (!is_string($keys) || empty($keys)) {
+        if ( ! is_string($keys) || empty($keys)) {
             return $default;
         }
 
@@ -57,7 +57,7 @@ class ArrayReader implements ConfigReader
 
         // Traverse all the keys
         foreach ($keys as $key) {
-            if (!array_key_exists($key, $configArray)) {
+            if ( ! array_key_exists($key, $configArray)) {
                 return $default;
             }
 
@@ -80,7 +80,7 @@ class ArrayReader implements ConfigReader
     {
         // Checks that $key is a non-empty string
         // Otherwise throw an exception
-        if (!is_string($key) || empty($key)) {
+        if ( ! is_string($key) || empty($key)) {
             throw new InvalidArgumentException('The given key is invalid. It must be a non-empty string');
         }
 
@@ -141,7 +141,7 @@ class ArrayReader implements ConfigReader
      */
     protected function guardAgainstConfigurationFilePathNotExisting($pathToConfigFiles): void
     {
-        if (!file_exists($pathToConfigFiles)) {
+        if ( ! file_exists($pathToConfigFiles)) {
             $message = sprintf('Path to configuration files does not exist: %s', $pathToConfigFiles);
 
             throw new InvalidArgumentException($message);
